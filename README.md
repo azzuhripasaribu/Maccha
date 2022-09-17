@@ -7,7 +7,7 @@ Members:
 - Ajie Restu Sanggusti (2006490081)
 - Muhammad Athaqil Makarim (2006489842)
 - Joel Adhika Rianforrel Sitanggang (2006607564)
-
+- Azzuhri Nauli Pasaribu ( 2006489634 )
 
 Product Name: Maccha
 </br>
