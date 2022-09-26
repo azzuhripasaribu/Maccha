@@ -97,7 +97,7 @@ class Account(AbstractBaseUser):
         return self.admin
     
 class Profile(models.Model):
-    user   = models.OneToOneField(Account, on_delete=models.CASCADE)
+    user = models.OneToOneField(Account, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='profile_pics', default='default_profile.png')
 
     def __str__(self) -> str:
