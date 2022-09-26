@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from PIL import Image
+
 
 class MyAccountManager(BaseUserManager):
     def create_user( self, email, username, full_name, company_name, password=None, is_active=True, is_staff=False, is_admin=False):
