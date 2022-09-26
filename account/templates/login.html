@@ -1,16 +1,38 @@
-<div class="bigcontainer">
-    <h1 class='login'>Login</h1>
-        <form method="POST" action=""> 
-            {% csrf_token %}
-            <div class="form-group">
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Email" name="email"><br>
-                </div>
-                <div class="col">
-                    <input type="password" class="form-control" placeholder="Password" name="password"><br>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Maccha</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+
+</head>
+<body>
+  
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+            <form method="POST" action=""> 
+                <h1>Sign in</h1>
+                {% csrf_token %}
+                <input type="text" placeholder="Email" name="email">
+                <input type="password" placeholder="Password" name="password" >
+                <button type ="submit" value="submit">Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <div class="topright"><img src="{% static 'img/maccha logo.png' %}"></div>
+                    <h1>Welcome</h1>
+                    <p>Sign in to procceed to your cashier system</p>
+                    <a href='/account/register'><button class="ghost" id="signUp">New to Maccha</button></a>
                 </div>
             </div>
-            <input type ="submit" class="button" id="button1" value="Submit">
-            <input type="reset" class="button" id="button2" value="Cancel" href="/">
-        </form>
-</div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
