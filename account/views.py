@@ -43,7 +43,7 @@ def homepage(request):
 
 def logout_request(request):
 	logout(request)
-	return redirect("")
+	return redirect("/")
 
 def profile(request):
     if request.method == 'POST':
