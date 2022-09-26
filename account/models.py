@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
 
 class MyAccountManager(BaseUserManager):
     def create_user( self, email, username, full_name, company_name, password=None, is_active=True, is_staff=False, is_admin=False):
@@ -92,3 +95,27 @@ class Account(AbstractBaseUser):
     @property
     def is_admin(self):
         return self.admin
+    
+class Profile(models.Model):
+    user = models.OneToOneField(Account, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='profile_pics', default='default_profile.png')
+
+    def __str__(self) -> str:
+        return f'{self.user.username} Profile'
+
+    #def save(self):
+        #super().save()
+        #profile_image = Image.open(self.image.path)
+        #if profile_image.height > 200 or profile_image.width > 200:
+            #rescale_profile_image = (200,200)
+            #profile_image.thumbnail(rescale_profile_image)
+            #profile_image.save(self.image.path)
+
+@receiver(post_save, sender=Account)
+def create_profile_account(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=Account)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
