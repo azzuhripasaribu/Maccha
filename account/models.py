@@ -103,13 +103,13 @@ class Profile(models.Model):
     def __str__(self) -> str:
         return f'{self.user.username} Profile'
 
-    def save(self):
-        super().save()
-        profile_image = Image.open(self.image.path)
-        if profile_image.height > 200 or profile_image.width > 200:
-            rescale_profile_image = (200,200)
-            profile_image.thumbnail(rescale_profile_image)
-            profile_image.save(self.image.path)
+    #def save(self):
+        #super().save()
+        #profile_image = Image.open(self.image.path)
+        #if profile_image.height > 200 or profile_image.width > 200:
+            #rescale_profile_image = (200,200)
+            #profile_image.thumbnail(rescale_profile_image)
+            #profile_image.save(self.image.path)
 
 @receiver(post_save, sender=Account)
 def create_profile_account(sender, instance, created, **kwargs):
