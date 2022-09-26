@@ -11,10 +11,11 @@
 </head>
 
 <body>
-  {% block content %}
+    <h1>Maccha website is live!</h1>
   {% if user.is_authenticated %}
   <a>Hi, {{user.username}}</a>
-  {% endblock content %}
+  {% endif %}
+
 </body>
 
 </html>
