@@ -1,0 +1,29 @@
+
+    <div class='bigcontainer'>
+        <h1 class='register'>Register</h1>
+            <form method="POST" action=""> 
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Email" name="email"><br>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Full Name" name="full_name"><br>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Username" name="username"><br>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Company Name" name="company_name"><br>
+                    </div>
+                    <div class="col">
+                        <input type="password" class="form-control" placeholder="Password" name="password"><br>
+                    </div>
+                    <div class="col">
+                        <input type="password" class="form-control" placeholder="Confirm Password" name="password_2"><br>
+                    </div>
+                </div>
+                <input type ="submit" class="button" id="button1" value="Submit">
+                <input type="reset" class="button" id="button2" value="Cancel">
+            </form>
+    </div>
