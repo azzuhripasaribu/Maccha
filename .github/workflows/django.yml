@@ -34,7 +34,7 @@ jobs:
 
     - name: Set up Ruby ${{ matrix.ruby-version }}
       uses: ruby/setup-ruby@v1
-      with: 
+      with:
         ruby-version: ${{ matrix.ruby-version }}
     - name: Install dpl
       run: gem install dpl
@@ -48,7 +48,7 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
-      
+    
     - name: Deploy to Heroku
       run: dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
 
