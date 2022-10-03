@@ -4,8 +4,7 @@
 	box-sizing: border-box;
 }
 
-
-.login-body {
+.profile-body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -37,6 +36,7 @@ p {
 
 
 button {
+    margin-top: 10px;
 	border-radius: 20px;
 	border: 1px solid #79dc74;
 	background-color: #79dc74;
