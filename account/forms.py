@@ -93,7 +93,7 @@ class LoginForm(forms.Form):
 class AccountUpdateForm (forms.ModelForm):
     class Meta:
         model = Account
-        fields = ['username','email']
+        fields = ['username','full_name']
 
 class UpdatePPForm(forms.ModelForm):
     class Meta:
