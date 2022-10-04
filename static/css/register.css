@@ -4,16 +4,14 @@
 	box-sizing: border-box;
 }
 
-body {
-	background: #f6f5f7;
-	background-image: url("https://img.freepik.com/free-vector/hand-drawn-matcha-tea-background_23-2148572222.jpg?w=2000");
+
+.register-body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
-	margin: -20px 0 50px;
 }
 
 h1 {

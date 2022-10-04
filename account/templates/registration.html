@@ -1,41 +1,36 @@
+{% extends 'bases.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Maccha</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static 'css/register.css' %}">
-    </head>
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock link %}
+{% block content %}
+<div class="register-body">
+    <div class="container right-panel-active" id="container">
+        <div class="form-container sign-up-container">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <h1>Create Account</h1>
+                    <input type="text" class="form-control" placeholder="Email" name="email">
+                    <input type="text" class="form-control" placeholder="Full Name" name="full_name">
+                    <input type="text" class="form-control" placeholder="Username" name="username">
+                    <input type="text" class="form-control" placeholder="Company Name" name="company_name">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
+                    <input type="password" class="form-control" placeholder="Confirm Password" name="password_2">
+                <input type ="submit" class="button" id="button1" value="Sign Up">
+                <input type="reset" class="button" id="button2" value="Cancel">
+            </form>
+        </div>
 
-    <body>
-        <div class="container right-panel-active" id="container">
-            <div class="form-container sign-up-container">
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    <h1>Create Account</h1>
-                        <input type="text" class="form-control" placeholder="Email" name="email">
-                        <input type="text" class="form-control" placeholder="Full Name" name="full_name">
-                        <input type="text" class="form-control" placeholder="Username" name="username">
-                        <input type="text" class="form-control" placeholder="Company Name" name="company_name">
-                        <input type="password" class="form-control" placeholder="Password" name="password">
-                        <input type="password" class="form-control" placeholder="Confirm Password" name="password_2">
-                    <input type ="submit" class="button" id="button1" value="Sign Up">
-                    <input type="reset" class="button" id="button2" value="Cancel">
-                </form>
-            </div>
-
-            <div class="overlay-container">
-                <div class="overlay">
-                    <div class="overlay-panel overlay-left">
-                        <div class="topleft"><img src="{% static "img/maccha logo.png"%}"></div>
-                        <h1>Already have an account?</h1>
-                        <p>Let's sign in and start using Maccha.</p>
-                        <a href="/account/login"><button class="ghost" id="signIn">Sign In</button><a/>
-                    </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <div class="topleft"><img src="{% static "img/maccha logo.png"%}"></div>
+                    <h1>Already have an account?</h1>
+                    <p>Let's sign in and start using Maccha.</p>
+                    <a href="/account/login"><button class="ghost" id="signIn">Sign In</button><a/>
                 </div>
             </div>
         </div>
-    </body>
-</html>
-
+    </div>
+</div>
+{% endblock content %}
