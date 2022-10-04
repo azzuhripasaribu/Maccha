@@ -25,3 +25,6 @@ Feature:
 4. Summarize Sales
 5. Auto-Update Stock
 6. User Profile
+
+
+[![Coverage Status](https://coveralls.io/repos/github/azzuhripasaribu/Maccha/badge.svg?branch=main&service=github)](https://coveralls.io/github/azzuhripasaribu/Maccha?branch=main)

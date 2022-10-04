@@ -1,24 +1,35 @@
+{% extends 'bases.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+{% endblock %}  
 {% block content %}
-<div>
-    <div>
-        <h3>User Profile</h3>
-        
-        <div>
-            <h2>{{user.username}}</h2>
-            <h2>{{user.email}}</h2>
+    <div class="profile-body">
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+                <form method="POST" enctype="multipart/form-data">
+                    <h1>Edit Profile</h1>
+                    {% csrf_token %}
+                    <fieldset><h3>
+                        Edit User Profile
+                    </h3>
+                    {{ account_form }}
+                    </fieldset>
+                    <button type ="submit" value="submit">Update</button>
+                </form>
+        </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-right">
+                <h1>Profile</h1>
+                <h3>Username: {{user.username}}</h3>
+                <h3>Email: {{user.email}}</h3>
+                <h3>Full Name: {{user.full_name}}</h3>
+                <h3>Company: {{user.company_name}}</h3>
+            </div>
         </div>
     </div>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset><h3>
-            Edit User Profile
-        </h3>
-        {{ account_form }}
-        </fieldset>
-        <div>
-            <button type="submit">Update</button>
-        </div>
-    </form>
+</div>
 </div>
 
-{% endblock content %}
+{% endblock %}
