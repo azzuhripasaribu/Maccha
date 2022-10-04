@@ -27,4 +27,4 @@ Feature:
 6. User Profile
 
 
-[![Coverage Status](https://coveralls.io/repos/github/azzuhripasaribu/Maccha/badge.svg?branch=main)](https://coveralls.io/github/azzuhripasaribu/Maccha?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/azzuhripasaribu/Maccha/badge.svg?branch=main)](https://coveralls.io/github/azzuhripasaribu/Maccha?branch=main&service=github)
