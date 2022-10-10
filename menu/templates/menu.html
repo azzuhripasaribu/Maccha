@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Menu</title>
+    <style>
+      body, div, form, input, select, textarea , label { 
+      
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: black;
+      
+      }
+      h1 {
+        text-align: center;
+      }
+      #friendlist {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse:collapse;
+        width: 100%;
+        
+      }
+      
+      #friendlist td, #friendlist th {
+        border: 1px solid black;
+        padding: 8px;
+      }
+      
+      #friendlist tr:nth-child(even){background-color: #f2f2f2;}
+      
+      #friendlist tr:hover {background-color: #ddd;}
+      
+      #friendlist th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #cc7a00;
+        color: white;
+      }
+      
+      </style>
+  </head>
+  
+  <body>
+    <h1>😊 Menu 😊</h1>
+    <table id="friendlist">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+      {% for element in menu %} <!--create a loop-->
+      {% if request.user == element.user %}
+      <tr>
+        <td>{{ element.name }}</td>
+        <td>{{ element.price }}</td>
+        <td>{{ element.description }}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      <!-- END SECTION -->
+    </table>
+  </body>
+</html>
