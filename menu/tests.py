@@ -84,3 +84,14 @@ class MenuTest(BaseTest):
         response = self.client.get(reverse("edit-menu", kwargs={"menu_id": id}))
         self.assertEqual(response.status_code,200)
         self.assertTemplateUsed(response,'edit-menu.html')
+
+    def test_delete_menu(self):
+        self.client.post(self.login_url,self.user,format='text/html')
+        response = self.client.post(self.addmenu_url,self.menu,format ='text/html')
+        dummy_menu = menuModel.objects.filter(name = 'ayam').first()
+        self.assertEqual(dummy_menu.price,self.menu["price"])
+        id = dummy_menu.id
+        response = self.client.post(reverse("delete-menu", kwargs={"menu_id": id}),format='text/html')
+        dummy_menu = menuModel.objects.filter(name = 'ayam').first()
+        self.assertIsNone(dummy_menu)
+        self.assertEqual(response.status_code,302)
