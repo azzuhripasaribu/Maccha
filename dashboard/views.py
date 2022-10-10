@@ -4,3 +4,6 @@ from django.http import HttpResponse
 
 def dashboard(request):
     return render(request,'dashboard.html')
+
+def add_menu(request):
+    return render(request,'index.html')
