@@ -14,23 +14,23 @@
 
 <body>
   <div class="navbar">
-  <ul>
-    <li><a class="active" href="/">Home</a></li>
-    {% if user.is_authenticated %}
-    <li><a href="../account/profile">Edit Profile</a></li>
-    <div class="nav-right">
-      <li><a href="../account/logout">Logout</a></li>
-    </div>
-    {% else %}
-    <div class="nav-right">
-      <li><a href="../account/login">Login</a></li>
-    </div>
-    {% endif %}
-  </ul>
-</div>
-{% block content %}
+    <ul>
+      <li><a class="active" href="/">Home</a></li>
+      {% if user.is_authenticated %}
+      <li><a href="../account/profile">Edit Profile</a></li>
+      <div class="nav-right">
+        <li><a href="../account/logout">Logout</a></li>
+      </div>
+      {% else %}
+      <div class="nav-right">
+        <li><a href="../account/login">Login</a></li>
+      </div>
+      {% endif %}
+    </ul>
+  </div>
+  {% block content %}
 
-{% endblock %} 
+  {% endblock %} 
 </body>
 
 </html>
