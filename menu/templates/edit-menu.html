@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Menu</title>
+  </head>
+  <body>
+    <h1>Edit Menu</h1>
+    <div class="testbox">
+      
+      <form action = "" method = "POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" onclick="return confirm('Are you sure you want to edit your menu?');">
+      </form>
+    </div>
+  </body>
+</html>

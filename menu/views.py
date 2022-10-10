@@ -33,3 +33,19 @@ def add_menu(request) :
         "form":form
     }
     return render(request,"add-menu.html",context)
+
+@login_required(login_url="../account/login")
+def edit_menu(request,menu_id) : 
+    menu = menuModel.objects.get(id = menu_id)
+    if request.user == menu.user:
+        if request.method == "POST":
+            form = MenuForm(request.POST, instance=menu)
+            if form.is_valid():
+                data = form.save(commit = False)
+                data.save()
+                return redirect('/menu')
+        else:
+            form = MenuForm(instance=menu)
+            return render(request, 'edit-menu.html', {'form':form})
+    else:
+            return redirect('/menu')
