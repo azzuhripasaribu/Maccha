@@ -49,3 +49,10 @@ def edit_menu(request,menu_id) :
             return render(request, 'edit-menu.html', {'form':form})
     else:
             return redirect('/menu')
+            
+@login_required(login_url="../account/login")
+def delete_menu(request, menu_id):
+    menu = menuModel.objects.get(id=menu_id)
+    menu.delete()
+    return redirect('/menu')
+   

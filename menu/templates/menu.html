@@ -57,7 +57,7 @@
         <td>{{ element.price }}</td>
         <td>{{ element.description }}</td>
         <td> <a  href="{% url 'edit-menu' element.id %}">Edit</a>
-          <a  href="" onclick="return confirm('Are you sure you want to delete your menu?');">Delete</a>
+          <a  href="{% url 'delete-menu' element.id %}" onclick="return confirm('Are you sure you want to delete your menu?');">Delete</a>
       </td>
       </tr>
       {% endif %}
