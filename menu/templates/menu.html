@@ -56,10 +56,14 @@
         <td>{{ element.name }}</td>
         <td>{{ element.price }}</td>
         <td>{{ element.description }}</td>
+        <td> <a  href="">Edit</a>
+          <a  href="" onclick="return confirm('Are you sure you want to delete your menu?');">Delete</a>
+      </td>
       </tr>
       {% endif %}
       {% endfor %}
       <!-- END SECTION -->
     </table>
+    <a href ="{% url 'add-menu' %}"><button > Add Menu</button></a>
   </body>
 </html>
