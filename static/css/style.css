@@ -1,14 +1,9 @@
 
-@import url('https://fonts.googleapis.com/css?family=Paprika');
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
 
 /*------------------------------------------------------------------
     SKELETON
 -------------------------------------------------------------------*/
 @font-face {
-    font-family: 'nautilus_pompiliusregular';
-    src: url('../fonts/nautilus-webfont.woff2') format('woff2'),
-         url('../fonts/nautilus-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
