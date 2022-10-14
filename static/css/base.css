@@ -9,14 +9,14 @@ body {
 
 }
 
-.navbar {
+#navbar {
     font-family: 'Montserrat', sans-serif;
     border: 0px;
 }
 .nav-right{
     float: right;
 }
-ul {
+#navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -24,11 +24,11 @@ ul {
     background-color: #333;
   }
   
-  li {
+  #navbar  li {
     float: left;
   }
   
-  li a {
+  #navbar  li a {
     display: block;
     color: white;
     text-align: center;
@@ -36,6 +36,20 @@ ul {
     text-decoration: none;
   }
   
-  li a:hover {
+  #navbar li a:hover {
     background-color: #111;
+  }
+
+  .content {
+    padding: 16px;
+  }
+  
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .sticky + .content {
+    padding-top: 60px;
   }

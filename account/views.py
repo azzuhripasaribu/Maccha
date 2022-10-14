@@ -4,6 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render,redirect
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # import requests
 
 from account.forms import LoginForm, RegisterForm, AccountUpdateForm, UpdatePPForm
@@ -45,6 +46,7 @@ def logout_request(request):
 	logout(request)
 	return redirect("/")
 
+@login_required(login_url="../account/login")
 def profile(request):
     if request.method == 'POST':
         account_form = AccountUpdateForm(request.POST,instance=request.user)
