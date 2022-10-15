@@ -1,69 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Menu</title>
-    <style>
-      body, div, form, input, select, textarea , label { 
-      
-      font-family: Roboto, Arial, sans-serif;
-      font-size: 14px;
-      color: black;
-      
-      }
-      h1 {
-        text-align: center;
-      }
-      #friendlist {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse:collapse;
-        width: 100%;
-        
-      }
-      
-      #friendlist td, #friendlist th {
-        border: 1px solid black;
-        padding: 8px;
-      }
-      
-      #friendlist tr:nth-child(even){background-color: #f2f2f2;}
-      
-      #friendlist tr:hover {background-color: #ddd;}
-      
-      #friendlist th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #cc7a00;
-        color: white;
-      }
-      
-      </style>
-  </head>
-  
-  <body>
-    <h1>😊 Menu 😊</h1>
-    <table id="friendlist">
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Description</th>
-        <th>Action</th>
-      </tr>
-      {% for element in menu %} <!--create a loop-->
+{% extends 'bases.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/menu_list.css' %}">
+{% endblock %}  
+{%block content%}
+    <div class="container">
+      <h2>Menu List</h2>
+      <a href="add-menu"><button type="button" class="btn btn-success">Add Menu</button></a>
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-1" onclick="sortTable(0)">Item</div>
+          <div class="col col-2">Price</div>
+          <div class="col col-3">Description</div>
+          <div class="col col-4">Action</div>
+        </li>
+        {% for element in menu %} <!--create a loop-->
       {% if request.user == element.user %}
-      <tr>
-        <td>{{ element.name }}</td>
-        <td>{{ element.price }}</td>
-        <td>{{ element.description }}</td>
-        <td> <a  href="{% url 'edit-menu' element.id %}">Edit</a>
-          <a  href="{% url 'delete-menu' element.id %}" onclick="return confirm('Are you sure you want to delete your menu?');">Delete</a>
-      </td>
-      </tr>
-      {% endif %}
+        <li class="table-row">
+          <div class="col col-1" data-label="Job Id">{{ element.name }}</div>
+          <div class="col col-2" data-label="Customer Name">Rp.{{ element.price }}</div>
+          <div class="col col-3" data-label="Amount">{{ element.description }}</div>
+          <div class="col col-4" data-label="Actions">
+            <a href="{% url 'edit-menu' element.id %}"><button type="button" class="btn btn-warning">Edit</button></a>
+            <a href="{% url 'delete-menu' element.id %}" onclick="return confirm('Are you sure you want to delete your menu?');"><button type="button" class="btn btn-danger">Delete</button></a></div>
+        </li>
+        {% endif %}
       {% endfor %}
-      <!-- END SECTION -->
-    </table>
-    <a href ="{% url 'add-menu' %}"><button > Add Menu</button></a>
-  </body>
-</html>
+      </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{%endblock%}
