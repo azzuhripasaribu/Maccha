@@ -48,10 +48,18 @@ def edit_menu(request,menu_id) :
     if request.user == menu.user:
         if request.method == "POST":
             form = MenuForm(request.POST, instance=menu)
-            if form.is_valid():
+            price = request.POST.get('price')
+            if form.is_valid() and int(price) > 0:
                 data = form.save(commit = False)
                 data.save()
                 return redirect('/menu')
+            else:
+                if int(price) <= 0:
+                    messages.error(request, f'Please Correct your Price, Price cannot be below 0 or 0')
+                    return redirect('../edit-menu/'+str(menu_id))
+                else:
+                    messages.error(request, f'No Duplicate Menu Name Allowed!')
+                    return redirect('../edit-menu/'+str(menu_id))
         else:
             form = MenuForm(instance=menu)
             return render(request, 'edit-menu.html', {'form':form})
