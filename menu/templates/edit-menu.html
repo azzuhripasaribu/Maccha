@@ -1,17 +1,44 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Edit Menu</title>
-  </head>
-  <body>
-    <h1>Edit Menu</h1>
-    <div class="testbox">
-      
+{% extends 'bases.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Edit Menu</title>
+{% endblock link %}
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<div class="container bg-white pb-4 px-4 rounded">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      <p class=" h1 mb-3 text-center font-weight-light">Edit Menu</p>
       <form action = "" method = "POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="formg-group">
+              <label for="{{form.name.id_for_label}}">Name</label>
+              {{form.name}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="formg-group">
+              <label for="{{form.price.id_for_label}}">Price</label>
+              {{form.price}}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="{{form.description.id_for_label}}">Description</label>
+              {{form.description}}
+            </div>
+          </div>
+        </div>
         <input type="submit" value="Submit" onclick="return confirm('Are you sure you want to edit your menu?');">
       </form>
     </div>
-  </body>
-</html>
+  </div>
+</div>
+
+{% endblock content %}
