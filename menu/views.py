@@ -72,3 +72,9 @@ def delete_menu(request, menu_id):
     menu.delete()
     return redirect('/menu')
    
+def cashier(request):
+    menu = menuModel.objects.all()
+    context = {
+        'menu':menu
+    }
+    return render(request,'cashier.html',context)

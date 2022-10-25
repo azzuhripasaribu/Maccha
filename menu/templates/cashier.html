@@ -1,0 +1,47 @@
+{% extends 'bases.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/menu_list.css' %}">
+{% endblock %}  
+{%block content%}
+<script type="text/javascript">
+
+    var clicks = 0;
+    function hello() {
+        clicks += 1;
+        document.getElementById("clicks").innerHTML = clicks;
+    };
+    function minus() {
+        clicks -= 1;
+        document.getElementById("clicks").innerHTML = clicks;
+    };
+    </script>
+    <div class="container">
+      <h2>Cashier</h2>
+      <a href=""><button type="button" class="btn btn-success">Procceed to Checkout</button></a>
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-1" onclick="sortTable(0)">Item</div>
+          <div class="col col-2">Price</div>
+          <div class="col col-3">Description</div>
+          <div class="col col-4">Action</div>
+        </li>
+        {% for element in menu %} <!--create a loop-->
+      {% if request.user == element.user %}
+        <li class="table-row">
+          <div class="col col-1" data-label="Job Id">{{ element.name }}</div>
+          <div class="col col-2" data-label="Customer Name">Rp.{{ element.price }}</div>
+          <div class="col col-3" data-label="Amount">{{ element.description }}</div>
+          <div class="col col-4" data-label="Actions">
+              <button type="button" onclick="minus()" class="btn btn-danger">Delete</button>
+              <button type="button" onclick="hello()" class="btn btn-warning">Add to cart</button>
+              <p>Amount: <a id="clicks">0</a></p>
+          </div>
+        </li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{%endblock%}
