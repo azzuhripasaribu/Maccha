@@ -45,4 +45,4 @@ def add_cashier(request) :
         'menu':menu,
         "form":form,
     }
-    return render(request,"cashier.html",context)
+    return render(request,"cashiers.html",context)
