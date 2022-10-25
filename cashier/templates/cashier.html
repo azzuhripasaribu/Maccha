@@ -1,0 +1,47 @@
+{% extends 'bases.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/menu_list.css' %}">
+{% endblock %}  
+{%block content%}
+    <div class="container">
+      <h2>Cashier</h2>
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-1" onclick="sortTable(0)">Item</div>
+          <div class="col col-2">Price</div>
+          <div class="col col-3">Quantity</div>
+          <div class="col col-3">Action</div>
+        </li>
+        
+        {% for element in menu %} <!--create a loop-->
+      {% if request.user == element.user %}
+      <form method="POST">
+        {% csrf_token %}
+        <li class="table-row">
+          <div class="col col-1" data-label="Job Id">{{ element.name }}</div>
+          <div class="col col-2" data-label="Customer Name">Rp.{{ element.price }}</div>
+            <!-- <button onclick="increment()">+</button>
+            <input id=itemQty type=number min=0 max=10> -->
+            <input type="hidden" name="menu_id" value={{ element.id }}>
+            <div class="col col-3" data-label="Quantity">{{form.itemQty}}</div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <!-- <button onclick="decrement()">-</button>
+            <script>
+            function increment() {
+                document.getElementById('itemQty').stepUp();
+            }
+            function decrement() {
+                document.getElementById('itemQty').stepDown();
+            }
+            </script> -->
+        </li>
+      </form>
+        {% endif %}
+      {% endfor %}
+    
+      </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{%endblock%}
