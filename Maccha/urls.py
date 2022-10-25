@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('dashboard.urls')),
     path('account/', include('account.urls')),
     path('menu/', include('menu.urls')),
+    path('cashier/', include('cashier.urls'))
 ]
