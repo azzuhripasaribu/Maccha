@@ -5,6 +5,7 @@ from requests import request
 from menu.forms import MenuForm
 from .models import menuModel
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 @login_required(login_url="../account/login")
@@ -20,14 +21,21 @@ def home(request):
 def add_menu(request) : 
     if request.method == "POST":
         form = MenuForm(request.POST or None)
-        if form.is_valid():
-            user = request.user
-            name = request.POST.get('name')
-            price = request.POST.get('price')
-            description = request.POST.get('description')
+        user = request.user
+        name = request.POST.get('name')
+        price = request.POST.get('price')
+        description = request.POST.get('description')
+        if form.is_valid() and int(price) > 0:
             menu = menuModel(user=user,name = name, price=price, description = description)
-            menu.save()
+            menu.save()    
             return redirect('menu')
+        else:
+            if int(price) <= 0:
+                messages.error(request, f'Please Correct your Price, Price cannot be below 0 or 0')
+            elif menuModel.objects.filter(name=name).exists():
+                messages.error(request, "Menu name already exists")
+
+            return redirect('add-menu')
     form = MenuForm()
     context = {
         "form":form
@@ -40,10 +48,18 @@ def edit_menu(request,menu_id) :
     if request.user == menu.user:
         if request.method == "POST":
             form = MenuForm(request.POST, instance=menu)
-            if form.is_valid():
+            price = request.POST.get('price')
+            if form.is_valid() and int(price) > 0:
                 data = form.save(commit = False)
                 data.save()
                 return redirect('/menu')
+            else:
+                if int(price) <= 0:
+                    messages.error(request, f'Please Correct your Price, Price cannot be below 0 or 0')
+                    return redirect('../edit-menu/'+str(menu_id))
+                else:
+                    messages.error(request, f'No Duplicate Menu Name Allowed!')
+                    return redirect('../edit-menu/'+str(menu_id))
         else:
             form = MenuForm(instance=menu)
             return render(request, 'edit-menu.html', {'form':form})
