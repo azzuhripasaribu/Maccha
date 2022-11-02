@@ -1,6 +1,6 @@
 # Create your views here.
 import json
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import JsonResponse
 from cart.models import Cart, CartItem
 from menu.models import menuModel
