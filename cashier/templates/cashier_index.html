@@ -1,0 +1,60 @@
+{% extends 'bases.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/menu_list.css' %}">
+{% endblock %}  
+{%block content%}
+<script type="text/javascript">
+
+    var clicks = 0;
+    function hello() {
+        clicks += 1;
+        document.getElementById("clicks").innerHTML = clicks;
+    };
+    function minus() {
+        clicks -= 1;
+        document.getElementById("clicks").innerHTML = clicks;
+    };
+    </script>
+    <div class="container">
+      <h2>Cashier</h2>
+      <div class="cart">
+
+        <a class="btn btn-success" href="{% url 'cart' %}" style="color:black; text-decoration:none; text-align: right ;">
+             <div class="cart-container">
+                <div class="cartitems"><p id="num_of_items">{{cart.num_of_items}}</p></div>
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+        </a>   
+    </div>
+      <a href="../cashier/list"><button type="button" class="btn btn-success">Procceed to Checkout</button></a>
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-1" onclick="sortTable(0)">Item</div>
+          <div class="col col-2">Price</div>
+          <div class="col col-3">Description</div>
+          <div class="col col-4">Action</div>
+        </li>
+        {% for product in products %} <!--create a loop-->
+        <div>
+            <div class="action">
+            <li class="table-row">
+            <div class="col col-1" data-label="Job Id">{{ product.name }}</div>
+            <div class="col col-2" data-label="Customer Name">Rp.{{ product.price }}</div>
+            <div class="col col-3" data-label="Amount">{{ product.description }}</div>
+            <div class="addContainer"><button class="btn btn-warning" value="{{product.id}}">Add to Cart</button></div>
+            </li>
+      </div>
+           
+
+    </div> 
+      {% endfor %}
+      </ul>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/delete.js' %}"></script>
+
+{%endblock%}
