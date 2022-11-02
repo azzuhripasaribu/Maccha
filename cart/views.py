@@ -33,3 +33,32 @@ def add_to_cart(request):
         num_of_item = cart.num_of_items
         print(cartitem)
     return JsonResponse(num_of_item, safe=False)
+
+
+@login_required(login_url="../account/login")
+def cart_list(request):
+    cart=None
+    cartitems=[]
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+        cartitems = cart.cartitems.all()
+
+    context = {
+        "cart":cart,
+        "items":cartitems,
+    }
+    return render(request, "cashier_list.html", context)
+
+
+@login_required(login_url="../account/login")
+def payment(request):   
+    cart=None
+    grand_total = 0
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+        grand_total = cart.grand_total_price
+    context = {
+        "cart":cart,
+        "grand_total":grand_total,
+    }
+    return render(request, "payment.html", context)
