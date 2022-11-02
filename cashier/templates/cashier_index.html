@@ -2,6 +2,7 @@
 {% load static %}
 {% block link %}
 <link rel="stylesheet" href="{% static 'css/menu_list.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}  
 {%block content%}
 <script type="text/javascript">
@@ -22,8 +23,9 @@
 
         <a class="btn btn-success" href="{% url 'cart' %}" style="color:black; text-decoration:none; text-align: right ;">
              <div class="cart-container">
-                <div class="cartitems"><p id="num_of_items">{{cart.num_of_items}}</p></div>
-                <i class="fa-solid fa-cart-shopping"></i>
+                <!-- <div class="cartitems"><p id="num_of_items">{{cart.num_of_items}}</p></div>
+                <i class="fa fa-cart-shopping"></i> -->
+                <i class="fa fa-shopping-cart"></i> {{cart.num_of_items}}
             </div>
         </a>   
     </div>
