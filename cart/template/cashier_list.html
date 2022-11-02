@@ -1,0 +1,35 @@
+{% extends 'bases.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/menu_list.css' %}">
+{% endblock %}  
+{%block content%}
+
+<div class="shoppingCart">
+  <h2>My Cart</h2>
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1" onclick="sortTable(0)">Name</div>
+      <div class="col col-2">Quantity</div>
+      <div class="col col-3">Unit Price</div>
+      <div class="col col-4">Total Price</div>
+    </li>
+    {% for item in items %}
+    <li class="table-row">
+        <div class="col col-1">{{item.product.name}}</div>
+        <div class="col col-2">{{item.quantity}}</div>
+        <div class="col col-3">Rp.{{item.product.price}}</div>
+        <div class="col col-4">Rp.{{item.price}}</div>
+      </li>
+
+      {% endfor %}
+  </ul>
+
+  <ul class="responsive-table">
+    <li class="table-header">
+    <div class="col">Grand-Total: Rp.{{cart.grand_total_price}}</div>
+    <div><a href="../cashier/payment">Pay</a></div>
+    </li>
+  </ul>
+
+{% endblock content %}
