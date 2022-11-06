@@ -9,19 +9,18 @@
     <div class="profile-body">
     <div class="container" id="container">
         <div class="form-container sign-in-container">
-                    <h1></h1>
-                    <h3>
-                      <div style="text-align: center;" class="col col-11.25">Grand-Total: Rp.{{cart.grand_total_price}}</div>
-                    </h3>
-                    <h5 style="text-align: center;">Input Amount ( Rp. )</h5>
-                    <input placeholder="Input Amount" type="text" name="" onkeyup="changes(this.value);">
-                    <h5 style="text-align: center;">Change ( Rp. )</h5>
-                    <input type="text" name="" id = 'change' readonly>
-                    <h2><form method="POST">
-                      {% csrf_token %}
-                      <button href="" type ="submit" value="submit"><a href="" type="submit">Do Payment</a></button>
-                  </form></h2>
-                    <input type="hidden" value="{{cart.grand_total_price}}" class="grand_totals" id ='grand_totalss'>
+          <form method="POST">
+            {% csrf_token %}
+            <h3>
+              <div style="text-align: center;" class="col col-11.25">Grand-Total: Rp.{{cart.grand_total_price}}</div>
+            </h3>
+            <h5 style="text-align: center;">Input Amount ( Rp. )</h5>
+            <input placeholder="Input Amount" type="text" name="amount" onkeyup="changes(this.value);">
+            <h5 style="text-align: center;">Change ( Rp. )</h5>
+            <input type="text" name="" id = 'change' readonly>
+            <button href="" type ="submit" value="submit">Do Payment</button>
+          </form>
+          <input type="hidden" value="{{cart.grand_total_price}}" class="grand_totals" id ='grand_totalss'>
                   
         </div>
         <div class="overlay-container">
