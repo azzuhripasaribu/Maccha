@@ -51,7 +51,12 @@ def cart_list(request):
 
 
 @login_required(login_url="../account/login")
-def payment(request):   
+def payment(request):  
+    if request.method == 'POST':
+        cart = Cart.objects.filter(user=request.user)
+        cart.update(completed=True)  # 🖘 save the update in the database
+        return render(request, 'payment_success.html')
+    
     cart=None
     grand_total = 0
     if request.user.is_authenticated:
@@ -62,15 +67,3 @@ def payment(request):
         "grand_total":grand_total,
     }
     return render(request, "payment.html", context)
-
-@login_required(login_url="../account/login")
-def payment_success(request):
-    if request.method == 'GET':
-        cart = Cart.objects.filter(user=request.user)
-        cart.update(completed=True)  # 🖘 save the update in the database
-        return render(request, 'payment_success.html')        
-
-    return render(request, 'payment.html', {'cart': cart})
-
-# Payment-sucess
-# Templates Payment-success html
