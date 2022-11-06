@@ -4,10 +4,9 @@
 <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
 {% endblock %} 
 {% block content %}
-
-
   <div class="greeting">
   {% if user.is_authenticated %}
   <h1>Transaction Has Been Successful</h1>
-</div>
+  {% endif %}
+  </div>
 {% endblock %} 

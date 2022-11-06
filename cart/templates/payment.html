@@ -19,7 +19,7 @@
                     <input type="text" name="" id = 'change' readonly>
                     <h2><form method="POST">
                       {% csrf_token %}
-                      <button href="" type ="submit" value="submit"><a href="" type="submit">Do Payment</a></button>
+                      <button href="" type ="submit" value="submit"><a href="{% url 'cart:payment_success' %}" type="submit">Do Payment</a></button>
                   </form></h2>
                     <input type="hidden" value="{{cart.grand_total_price}}" class="grand_totals" id ='grand_totalss'>
                   
