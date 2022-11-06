@@ -62,3 +62,15 @@ def payment(request):
         "grand_total":grand_total,
     }
     return render(request, "payment.html", context)
+
+@login_required(login_url="../account/login")
+def payment_success(request):
+    if request.method == 'GET':
+        cart = Cart.objects.get(user=request.user, completed=True)
+        cart.save()  # 🖘 save the update in the database
+        return render(request, 'payment_success.html')        
+
+    return render(request, 'payment.html', {'cart': cart})
+
+# Payment-sucess
+# Templates Payment-success html
