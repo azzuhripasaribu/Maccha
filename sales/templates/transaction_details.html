@@ -1,18 +1,18 @@
 {% extends 'bases.html' %}
 {% load static %}
 {% block link %}
-<link rel="stylesheet" href="{% static 'css/menu_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/details.css' %}">
 {% endblock %}  
 {%block content%}
 
 <div class="shoppingCart">
-  <h2>My Cart</h2>
+  <h2>Transaction Details</h2>
   <ul class="responsive-table">
     <li class="table-header">
-      <div class="col col-1" onclick="sortTable(0)">Name</div>
-      <div class="col col-2">Quantity</div>
-      <div class="col col-3">Unit Price</div>
-      <div class="col col-4">Total Price</div>
+      <div class="col col-1" onclick="sortTable(0)">Item Name</div>
+      <div class="col col-2">Amount of Item Sold</div>
+      <div class="col col-3">Price per Piece</div>
+      <div class="col col-4">Grand Total Price</div>
     </li>
     {% for item in items %}
     <li class="table-row">
@@ -27,7 +27,7 @@
 
   <ul class="responsive-table">
     <li class="table-header">
-    <div><a href="..">Back</a></div>
+    <div><a href=".."><button type="button" class="btn btn-warning ">Back to Transaction History</button></a></div>
     </li>
   </ul>
 
