@@ -16,16 +16,17 @@
       <div class="col col-5">Action</div>
     </li>
     {% for item in cart %}
+    {% if request.user == item.user %}
     <li class="table-row">
         <div class="col col-1">{{item.id}}</div>
         <div class="col col-2">{{item.num_of_items}}</div>
         <div class="col col-3">Rp.{{item.grand_total_price}}</div>
         <div class="col col-4">{{item.created}}</div>
         <div class="col col-5">
-          <a href=""><button type="button" class="btn btn-warning ">Details</button></a>
+          <a href="{% url 'sales:sale_details' item.id %}"><button type="button" class="btn btn-warning ">Details</button></a>
         </div>
       </li>
-
+      {% endif %}
       {% endfor %}
   </ul>
 
@@ -35,5 +36,4 @@
     <div class="col">Total Item Sold: {{total_item}}</div>
     </li>
   </ul>
-
 {% endblock content %}
