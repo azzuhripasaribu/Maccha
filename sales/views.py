@@ -35,3 +35,26 @@ def sale_details(request, cart_id):
         "items":cartitems,
     }
     return render(request, "transaction_details.html", context)
+
+@login_required(login_url="../account/login")
+def item_detail(request):
+    menu = menuModel.objects.filter(user=request.user)
+    carts = Cart.objects.filter(user=request.user)
+    item_count = {}
+
+    for transaction in carts:
+        cart_items = CartItem.objects.filter(cart=transaction)
+        for item in cart_items:
+            if item.product.name not in item_count.keys():
+                item_count[item.product.name] = 0
+            
+            item_count[item.product.name] += 1
+
+    
+        
+
+
+    context = {
+        'menu_items': item_count
+    }
+    return render(request,'item_details.html', context)
