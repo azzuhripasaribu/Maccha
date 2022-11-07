@@ -23,6 +23,20 @@ def sale_history(request):
     return render(request, "transaction_history.html", context)
 
 @login_required(login_url="../account/login")
+def sale_details(request, cart_id):
+    cart = None
+    cartitems=[]
+    if request.user.is_authenticated:
+        cart = Cart.objects.get(user = request.user , id = cart_id)
+        cartitems = cart.cartitems.all()
+
+    context = {
+        "cart":cart,
+        "items":cartitems,
+    }
+    return render(request, "transaction_details.html", context)
+
+@login_required(login_url="../account/login")
 def item_detail(request):
     menu = menuModel.objects.filter(user=request.user)
     carts = Cart.objects.filter(user=request.user)
