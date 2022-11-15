@@ -6,28 +6,27 @@
 {%block content%}
 
 <div class="shoppingCart">
-  <h2>Transaction History</h2>
+  <h2>Item Details</h2>
   <ul class="responsive-table">
     <li class="table-header">
-      <div class="col col-1" onclick="sortTable(0)">name</div>
-      <div class="col col-4">Quantity</div>
+      <div class="col col-1 text-center" onclick="sortTable(0)">name</div>
+      <div class="col col-11 text-center">Quantity</div>
     </li>
     {% for key,val in menu_items.items %}
     <li class="table-row">
-        <div class="col col-1">{{key}}</div>
-        <div class="col col-1">{{val}}</div>
-
+        <div class="col col-1 text-center">{{key}}</div>
+        <div class="col col-11 text-center">{{val}}</div>
     </li>
     {% endfor %}
   </ul>
 
   <ul class="responsive-table">
     <li class="table-header">
-    <div class="col">Total Income: Rp.{{total_income}}</div>
-    <div class="col">Total Item Sold: {{total_item}}</div>
-    <button class="btn btn-warning">
-        <a href="{% url 'sales:sale_history' %}">Back</a>
-    </button>
+      <div class="col col-1"> 
+        <button class="btn btn-warning">
+          <a href="{% url 'sales:sale_history' %}">back</a>
+        </button>
+      </div>
     </li>
   </ul>
 
