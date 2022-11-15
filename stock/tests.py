@@ -68,7 +68,7 @@ class TestViews(BaseTest):
         self.assertEqual(response.status_code,302)
 
         dummy_stock = Stock.objects.filter(name = self.stock['name']).first()
-        dummy_user = Account.objects.get(email=self.user['user'])
+        dummy_user = Account.objects.get(email=self.user['email'])
         self.assertEqual(dummy_stock.user, dummy_user)
         self.assertEqual(dummy_stock.quantity,self.stock['quantity'])
     
