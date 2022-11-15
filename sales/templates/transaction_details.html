@@ -1,0 +1,34 @@
+{% extends 'bases.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/details.css' %}">
+{% endblock %}  
+{%block content%}
+
+<div class="shoppingCart">
+  <h2>Transaction Details</h2>
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1" onclick="sortTable(0)">Item Name</div>
+      <div class="col col-2">Amount of Item Sold</div>
+      <div class="col col-3">Price per Piece</div>
+      <div class="col col-4">Grand Total Price</div>
+    </li>
+    {% for item in items %}
+    <li class="table-row">
+        <div class="col col-1">{{item.product.name}}</div>
+        <div class="col col-2">{{item.quantity}}</div>
+        <div class="col col-3">Rp.{{item.product.price}}</div>
+        <div class="col col-4">Rp.{{item.price}}</div>
+      </li>
+
+      {% endfor %}
+  </ul>
+
+  <ul class="responsive-table">
+    <li class="table-header">
+    <div><a href=".."><button type="button" class="btn btn-warning ">Back to Transaction History</button></a></div>
+    </li>
+  </ul>
+
+{% endblock content %}

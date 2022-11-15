@@ -1,0 +1,44 @@
+{% extends 'bases.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/sales.css' %}">
+{% endblock %}  
+{%block content%}
+
+<div class="shoppingCart">
+  <h2>Transaction History</h2>
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1" onclick="sortTable(0)">ID</div>
+      <div class="col col-2">Quantity</div>
+      <div class="col col-3">Income</div>
+      <div class="col col-4">Transaction Date</div>
+      <div class="col col-5">Action</div>
+    </li>
+    {% for item in cart %}
+    {% if request.user == item.user %}
+    <li class="table-row">
+        <div class="col col-1">{{item.id}}</div>
+        <div class="col col-2">{{item.num_of_items}}</div>
+        <div class="col col-3">Rp.{{item.grand_total_price}}</div>
+        <div class="col col-4">{{item.created}}</div>
+        <div class="col col-5">
+          <a href="{% url 'sales:sale_details' item.id %}"><button type="button" class="btn btn-warning ">Details</button></a>
+        </div>
+      </li>
+      {% endif %}
+      {% endfor %}
+  </ul>
+
+  <ul class="responsive-table">
+    <li class="table-header">
+    <div class="col">Total Sales Turnover: Rp.{{total_income}}</div>
+    <div class="col">Total Item Sold: {{total_item}}</div>
+    <div class="col">
+      <button class="btn btn-warning">
+        <a href="{% url 'sales:item_detail' %}">Details</a>
+      </button>
+    </div>
+    </li>
+  </ul>
+{% endblock content %}
