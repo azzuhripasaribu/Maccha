@@ -19,7 +19,7 @@
           <div class="col col-1" data-label="Job Id">{{ element.name }}</div>
           <div class="col col-2" data-label="Customer Name">{{ element.quantity }}</div>
           <div class="col col-4" data-label="Actions">
-            <a href=""><button type="button" class="btn btn-warning">Update</button></a>
+            <a href="{% url 'stock:update_stock' element.id %}"><button type="button" class="btn btn-warning">Update</button></a>
             <a href="{% url 'stock:delete-stock' element.id %}" onclick="return confirm('Are you sure you want to delete this stock?');"><button type="button" class="btn btn-danger">Delete</button></a></div>
         </li>
         {% endif %}
