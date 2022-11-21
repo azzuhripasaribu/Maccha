@@ -12,6 +12,7 @@ class BaseTest(TestCase):
         self.login_url = reverse('login_page')
         self.logout_url = reverse('logout_page')
         self.addmenu_url = reverse('add-menu')
+        self.stock_url = reverse('stock:stock')
         self.add_stock_url = reverse('stock:add_stock')
 
         self.user = {
@@ -83,6 +84,16 @@ class TestUrls(BaseTest):
         self.assertEqual(resolve(self.update_stock_url).func, update_stock)
     
 class TestViews(BaseTest):
+    def test_unauthenticated_access(self):
+        response = self.client.get(self.stock_url)
+        self.assertEqual(response.status_code,302)
+
+    def test_authenticaed_access(self):
+        self.client.post(self.login_url,self.user,format='text/html')
+        response = self.client.get(self.stock_url)
+        self.assertEqual(response.status_code,200)
+        self.assertTemplateUsed(response,"stock.html")
+
     def test_add_stock_unauthenticated_access(self):
         response = self.client.get(self.add_stock_url)
         self.assertEqual(response.status_code,302)
@@ -203,6 +214,23 @@ class TestViews(BaseTest):
         response = self.client.post(self.update_stock_url,self.stock_invalid,format ='text/html')
 
         self.assertRedirects(response,self.update_stock_url,302,200,'',True)
+
+    def test_delete_stock(self):
+        # Logs in test client
+        self.client.post(self.login_url,self.user,format='text/html')
+
+        # Add menu to database
+        self.client.post(self.addmenu_url,self.menu1,format ='text/html')
+    
+        # Add stock to database
+        self.client.post(self.add_stock_url,self.stock,format ='text/html')
+
+        dummy_menu = Stock.objects.filter(name = 'ayam').first()
+        id = dummy_menu.id
+        response = self.client.post(reverse("stock:delete-stock", kwargs={"stock_id": id}),format='text/html')
+        dummy_menu = Stock.objects.filter(name = 'ayam').first()
+        self.assertIsNone(dummy_menu)
+        self.assertEqual(response.status_code,302)
 
 
     
