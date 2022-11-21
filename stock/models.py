@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from menu.models import menuModel;
+from menu.models import menuModel
 
 class Stock(models.Model):
     name = models.CharField(max_length=255)
