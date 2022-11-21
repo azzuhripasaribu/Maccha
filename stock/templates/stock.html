@@ -1,0 +1,31 @@
+{% extends 'bases.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/menu_list.css' %}">
+{% endblock %}  
+{%block content%}
+    <div class="container">
+      <h2>Stock List</h2>
+      <a href="add"><button type="button" class="btn btn-success">Add Stock</button></a>
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-1" onclick="sortTable(0)">Name</div>
+          <div class="col col-2">Quantity</div>
+          <div class="col col-4">Action</div>
+        </li>
+        {% for element in menu %} <!--create a loop-->
+      {% if request.user == element.user %}
+        <li class="table-row">
+          <div class="col col-1" data-label="Job Id">{{ element.name }}</div>
+          <div class="col col-2" data-label="Customer Name">{{ element.quantity }}</div>
+          <div class="col col-4" data-label="Actions">
+            <a href=""><button type="button" class="btn btn-warning">Update</button></a>
+            <a href="{% url 'stock:delete-stock' element.id %}" onclick="return confirm('Are you sure you want to delete this stock?');"><button type="button" class="btn btn-danger">Delete</button></a></div>
+        </li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{%endblock%}
