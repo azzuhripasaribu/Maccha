@@ -27,7 +27,7 @@ def add_stock(request):
             for menuId in menu:
                 menuObject = menuModel.objects.get(id=menuId)
                 stock.menu.add(menuObject)
-            return redirect('dashboard')
+            return redirect('stock:stock')
         return redirect('stock:add_stock')
     form = StockForm(user=request.user)
     context = {
@@ -56,7 +56,7 @@ def update_stock(request, id):
             for menuId in menu:
                 menuObject = menuModel.objects.get(id=menuId)
                 stock.menu.add(menuObject)
-            return redirect('dashboard')
+            return redirect('stock:stock')
             
         return redirect('stock:update_stock',id = id)
 
@@ -70,4 +70,4 @@ def update_stock(request, id):
 def delete_stock(request, stock_id):
     stock = Stock.objects.get(id=stock_id)
     stock.delete()
-    return redirect('/stock')
+    return redirect('stock:stock')
