@@ -25,11 +25,18 @@ def add_menu(request) :
         name = request.POST.get('name')
         price = request.POST.get('price')
         description = request.POST.get('description')
-        if form.is_valid() and int(price) > 0:
+        if form.is_valid():
             menu = menuModel(user=user,name = name, price=price, description = description)
             menu.save()    
             return redirect('menu')
         else:
+            # Checks if price is integer
+            try:
+                int(price)
+            except ValueError:
+                messages.error(request,f'Price must be integers')
+                return redirect('add-menu')
+
             if int(price) <= 0:
                 messages.error(request, f'Please Correct your Price, Price cannot be below 0 or 0')
             elif menuModel.objects.filter(name=name).exists():
@@ -49,11 +56,18 @@ def edit_menu(request,menu_id) :
         if request.method == "POST":
             form = MenuForm(request.POST, instance=menu)
             price = request.POST.get('price')
-            if form.is_valid() and int(price) > 0:
+            if form.is_valid():
                 data = form.save(commit = False)
                 data.save()
                 return redirect('/menu')
             else:
+                # Checks if price is integer
+                try:
+                    int(price)
+                except ValueError:
+                    messages.error(request,f'Price must be integers')
+                    return redirect('add-menu')
+
                 if int(price) <= 0:
                     messages.error(request, f'Please Correct your Price, Price cannot be below 0 or 0')
                     return redirect('../edit-menu/'+str(menu_id))
