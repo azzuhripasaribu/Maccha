@@ -27,7 +27,7 @@ def add_stock(request):
             for menuId in menu:
                 menuObject = menuModel.objects.get(id=menuId)
                 stock.menu.add(menuObject)
-            return redirect('dashboard')
+            return redirect('stock:stock')
         return redirect('stock:add_stock')
     form = StockForm(user=request.user)
     context = {
