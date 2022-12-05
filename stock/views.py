@@ -69,5 +69,7 @@ def update_stock(request, id):
 @login_required(login_url="../account/login")
 def delete_stock(request, stock_id):
     stock = Stock.objects.get(id=stock_id)
-    stock.delete()
+    if stock.user == request.user:
+        stock.delete()
+        
     return redirect('/stock')
