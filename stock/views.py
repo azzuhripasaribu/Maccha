@@ -56,7 +56,7 @@ def update_stock(request, id):
             for menuId in menu:
                 menuObject = menuModel.objects.get(id=menuId)
                 stock.menu.add(menuObject)
-            return redirect('dashboard')
+            return redirect('stock:stock')
             
         return redirect('stock:update_stock',id = id)
 
