@@ -1,10 +1,10 @@
-name: CD Heroku
+name: CD Heroku Staging
 
 on:
   push:
-    branches: [main]
+    branches: [staging]
   pull_request:
-    branches: [main]
+    branches: [staging]
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+      HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME_STAGING }}
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.7
@@ -32,5 +32,5 @@ jobs:
       with:
         initial_status: success
         token: ${{ github.token }}
-        target_url: https://${{ secrets.HEROKU_APP_NAME }}.herokuapp.com
+        target_url: https://${{ secrets.HEROKU_APP_NAME_STAGING }}.herokuapp.com
         environment: production
