@@ -7,8 +7,19 @@ from stock.forms import StockForm
 @login_required(login_url="login_page")
 def home(request):
     stock = Stock.objects.all()
+    menu = {}
+    for stockEntry in stock:
+        menuStock = stockEntry.menu.all()
+        menu[stockEntry.name] = ""
+        for menuEntry in menuStock:
+            menu[stockEntry.name] = menu[stockEntry.name] +f'{menuEntry}, '
+        menu[stockEntry.name] = menu[stockEntry.name][0:-2]
+        
+
+    print(menu)
     context = {
-        'menu':stock
+        'stock':stock,
+        'menu':menu
     }
     return render(request, "stock.html",context)
 
@@ -52,6 +63,7 @@ def update_stock(request, id):
         if form.is_valid():
             stock.name = name
             stock.quantity = quantity
+            stock.menu.clear()
             stock.save()
             for menuId in menu:
                 menuObject = menuModel.objects.get(id=menuId)
