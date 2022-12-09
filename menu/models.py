@@ -6,7 +6,7 @@ from django.conf import settings
 # Create your models here.
 class menuModel(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30, unique = True)
+    name = models.CharField(max_length=30)
     price = models.IntegerField()
     description = models.TextField()
     

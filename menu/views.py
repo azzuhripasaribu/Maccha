@@ -20,8 +20,8 @@ def home(request):
 @login_required(login_url="login_page")
 def add_menu(request) : 
     if request.method == "POST":
-        form = MenuForm(request.POST or None)
         user = request.user
+        form = MenuForm(request.POST or None, user=user)
         name = request.POST.get('name')
         price = request.POST.get('price')
         description = request.POST.get('description')
@@ -30,6 +30,7 @@ def add_menu(request) :
             menu.save()    
             return redirect('menu')
         else:
+            print(form.errors.as_data())
             # Checks if price is integer
             try:
                 int(price)
@@ -43,7 +44,7 @@ def add_menu(request) :
                 messages.error(request, "Menu name already exists")
 
             return redirect('add-menu')
-    form = MenuForm()
+    form = MenuForm(user=request.user)
     context = {
         "form":form
     }
