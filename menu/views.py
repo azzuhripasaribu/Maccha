@@ -83,7 +83,8 @@ def edit_menu(request,menu_id) :
 @login_required(login_url="login_page")
 def delete_menu(request, menu_id):
     menu = menuModel.objects.get(id=menu_id)
-    menu.delete()
+    if menu.user == request.user:
+        menu.delete()
     return redirect('/menu')
    
 def cashier(request):
