@@ -25,12 +25,11 @@
             <div class="overlay-panel overlay-right">
                 <h1>MACCHA</h1>
                     {% csrf_token %}
-                    <fieldset><h3>
+                    <h3>
                         Choose your desired Menu Here!
                     </h3>
                     {{ form.menu }}
-                    </fieldset>
-                    <button type ="submit" value="submit" onclick="return confirm('Recheck before you add the menu!')"> Add Now!</button>
+                    <button type ="submit" value="submit" onclick="return confirm('Before you add the stock, double-check.!')"> Add Now!</button>
                 </form>
 
             </div>
