@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from requests import request
 from menu.forms import MenuForm
 from .models import menuModel
+from cart.models import Cart, CartItem
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -84,6 +85,12 @@ def edit_menu(request,menu_id) :
 @login_required(login_url="login_page")
 def delete_menu(request, menu_id):
     menu = menuModel.objects.get(id=menu_id)
+    
+    carts = CartItem.objects.filter(product_id=menu_id)
+    if carts.exists():
+        for cart in carts:
+            cart.cart.delete()
+
     if menu.user == request.user:
         menu.delete()
     return redirect('/menu')
