@@ -4,7 +4,7 @@ from stock.models import Stock
 from menu.models import menuModel
 from stock.forms import StockForm
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def home(request):
     stock = Stock.objects.all()
     context = {
@@ -12,7 +12,7 @@ def home(request):
     }
     return render(request, "stock.html",context)
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def add_stock(request):
     if request.method == 'POST':
         form = StockForm(request.POST or None,user = request.user)
@@ -66,7 +66,7 @@ def update_stock(request, id):
     }
     return render(request, 'update_stock.html', context)
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def delete_stock(request, stock_id):
     stock = Stock.objects.get(id=stock_id)
     stock.delete()
