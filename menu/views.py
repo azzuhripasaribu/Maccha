@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def home(request):
     menu = menuModel.objects.all()
     context = {
@@ -17,7 +17,7 @@ def home(request):
     return render(request, "menu.html",context)
 
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def add_menu(request) : 
     if request.method == "POST":
         form = MenuForm(request.POST or None)
@@ -42,7 +42,7 @@ def add_menu(request) :
     }
     return render(request,"add-menu.html",context)
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def edit_menu(request,menu_id) : 
     menu = menuModel.objects.get(id = menu_id)
     if request.user == menu.user:
@@ -66,7 +66,7 @@ def edit_menu(request,menu_id) :
     else:
             return redirect('/menu')
             
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def delete_menu(request, menu_id):
     menu = menuModel.objects.get(id=menu_id)
     menu.delete()
