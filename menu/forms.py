@@ -8,7 +8,10 @@ import gettext
 _ = gettext.gettext
 
 class MenuForm(forms.ModelForm):
-    
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(MenuForm, self).__init__(*args, **kwargs)
+        
     class Meta:
         model = menuModel
         fields = ["name","price","description"]
@@ -22,9 +25,10 @@ class MenuForm(forms.ModelForm):
     def clean_name(self):
         data = self.cleaned_data["name"]
         # Checks if menu already exist
-        menu = menuModel.objects.filter(name=data)
+        menu = menuModel.objects.filter(name=data,user=self.user)
         if menu.exists():
             if not menu[0] == self.instance:
+                print("THis")
                 raise ValidationError(
                     _('Invalid value: %(value)s'),
                     code='MenuAlreadyExist',
