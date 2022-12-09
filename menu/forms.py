@@ -21,14 +21,15 @@ class MenuForm(forms.ModelForm):
             
     def clean_name(self):
         data = self.cleaned_data["name"]
-
         # Checks if menu already exist
-        if menuModel.objects.filter(name=data).exists():
-            raise ValidationError(
-                _('Invalid value: %(value)s'),
-                code='MenuAlreadyExist',
-                params={'value': 'name'},
-            )
+        menu = menuModel.objects.filter(name=data)
+        if menu.exists():
+            if not menu[0] == self.instance:
+                raise ValidationError(
+                    _('Invalid value: %(value)s'),
+                    code='MenuAlreadyExist',
+                    params={'value': 'name'},
+                )
         return data
 
     def clean_price(self):
