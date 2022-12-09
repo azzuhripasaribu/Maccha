@@ -5,7 +5,7 @@ from cart.models import Cart, CartItem
 from menu.models import menuModel
 from django.contrib.auth.decorators import login_required
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def sale_history(request):
     total_income = 0
     total_item = 0
@@ -22,7 +22,7 @@ def sale_history(request):
     }
     return render(request, "transaction_history.html", context)
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def sale_details(request, cart_id):
     cart = None
     cartitems=[]
@@ -36,7 +36,7 @@ def sale_details(request, cart_id):
     }
     return render(request, "transaction_details.html", context)
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def item_detail(request):
     menu = menuModel.objects.filter(user=request.user)
     carts = Cart.objects.filter(user=request.user)
