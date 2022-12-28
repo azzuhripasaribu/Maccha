@@ -28,8 +28,15 @@ class BaseTest(TestCase):
             'price' : 50000,
             'description' : 'hewan berbulu'
         }
+        self.menu2 = {
+            'id' : 2,
+            'user' : 'test@email.com',
+            'name' : 'sapi',
+            'price' : 50000,
+            'description' : 'hewan berambut'
+        }
         self.editmenu = {
-            'name' : 'roti',
+            'name' : 'sapi',
             'price' : 3000,
             'description' : 'ayam bakar'
         }
@@ -70,10 +77,21 @@ class MenuTest(BaseTest):
         self.assertEqual(dummy_menu.price,self.menu["price"])
         id = dummy_menu.id
         response = self.client.post(reverse("edit-menu", kwargs={"menu_id": id}),self.editmenu,format='text/html')
-        dummy_menu = menuModel.objects.filter(name = 'roti').first()
+        dummy_menu = menuModel.objects.filter(name = 'sapi').first()
         self.assertEqual(response.status_code,302)
         self.assertEqual(dummy_menu.name,self.editmenu["name"])
         self.assertEqual(dummy_menu.price,self.editmenu["price"])
+    
+    def test_edit_menu_duplicate_post(self):
+        self.client.post(self.login_url,self.user,format='text/html')
+        response = self.client.post(self.addmenu_url,self.menu,format ='text/html')
+        response = self.client.post(self.addmenu_url,self.menu2,format ='text/html')
+        dummy_menu = menuModel.objects.filter(name = 'ayam').first()
+        self.assertEqual(dummy_menu.price,self.menu["price"])
+        id = dummy_menu.id
+        response = self.client.post(reverse("edit-menu", kwargs={"menu_id": id}),self.editmenu,format='text/html')
+        self.assertEqual(response.status_code,302)
+
 
     def test_edit_menu_get(self):
         self.client.post(self.login_url,self.user,format='text/html')

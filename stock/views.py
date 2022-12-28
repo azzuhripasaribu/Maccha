@@ -4,15 +4,26 @@ from stock.models import Stock
 from menu.models import menuModel
 from stock.forms import StockForm
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def home(request):
     stock = Stock.objects.all()
+    menu = {}
+    for stockEntry in stock:
+        menuStock = stockEntry.menu.all()
+        menu[stockEntry.name] = ""
+        for menuEntry in menuStock:
+            menu[stockEntry.name] = menu[stockEntry.name] +f'{menuEntry}, '
+        menu[stockEntry.name] = menu[stockEntry.name][0:-2]
+        
+
+    print(menu)
     context = {
-        'menu':stock
+        'stock':stock,
+        'menu':menu
     }
     return render(request, "stock.html",context)
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def add_stock(request):
     if request.method == 'POST':
         form = StockForm(request.POST or None,user = request.user)
@@ -27,7 +38,7 @@ def add_stock(request):
             for menuId in menu:
                 menuObject = menuModel.objects.get(id=menuId)
                 stock.menu.add(menuObject)
-            return redirect('dashboard')
+            return redirect('stock:stock')
         return redirect('stock:add_stock')
     form = StockForm(user=request.user)
     context = {
@@ -52,11 +63,12 @@ def update_stock(request, id):
         if form.is_valid():
             stock.name = name
             stock.quantity = quantity
+            stock.menu.clear()
             stock.save()
             for menuId in menu:
                 menuObject = menuModel.objects.get(id=menuId)
                 stock.menu.add(menuObject)
-            return redirect('dashboard')
+            return redirect('stock:stock')
             
         return redirect('stock:update_stock',id = id)
 
@@ -66,8 +78,10 @@ def update_stock(request, id):
     }
     return render(request, 'update_stock.html', context)
 
-@login_required(login_url="../account/login")
+@login_required(login_url="login_page")
 def delete_stock(request, stock_id):
     stock = Stock.objects.get(id=stock_id)
-    stock.delete()
+    if stock.user == request.user:
+        stock.delete()
+        
     return redirect('/stock')
